@@ -1,0 +1,26 @@
+namespace BankService.Models;
+
+/// <summary>
+/// The response returned to the presentation/client after an account-opening attempt.
+/// </summary>
+public sealed class OpenAccountResponse
+{
+    public bool IsApproved { get; init; }
+    public string Message { get; init; } = string.Empty;
+    public Guid? AccountId { get; init; }
+    public string? AccountNumber { get; init; }
+    public string? Status { get; init; }
+    public IReadOnlyList<AccountDocument> Documents { get; init; } = [];
+}
+
+/// <summary>
+/// A document attached to the opened account, surfaced in the response.
+/// </summary>
+public sealed class AccountDocument
+{
+    public Guid Id { get; init; }
+    public string Uri { get; init; } = string.Empty;
+    public string FileName { get; init; } = string.Empty;
+    public string VerificationStatus { get; init; } = string.Empty;
+    public DateTime UploadedOnUtc { get; init; }
+}

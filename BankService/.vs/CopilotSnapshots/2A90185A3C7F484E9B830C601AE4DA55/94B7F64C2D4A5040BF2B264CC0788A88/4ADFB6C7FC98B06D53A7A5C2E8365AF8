@@ -1,0 +1,10 @@
+﻿namespace BankService.Domain.Common;
+
+/// <summary>
+/// Marker interface for domain events. A domain event records something
+/// meaningful that happened to an aggregate in the past tense.
+/// </summary>
+public interface IDomainEvent
+{
+    DateTime OccurredOnUtc { get; }
+}

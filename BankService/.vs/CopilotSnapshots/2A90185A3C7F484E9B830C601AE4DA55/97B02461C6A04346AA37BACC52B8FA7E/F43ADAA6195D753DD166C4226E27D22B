@@ -1,0 +1,47 @@
+﻿using BankService.Domain.Entities;
+using BankService.Domain.ValueObjects;
+using Microsoft.EntityFrameworkCore;
+
+namespace BankService.Infrastructure.Persistence;
+
+/// <summary>
+/// EF Core context for the bank. For this mock it is backed by the in-memory
+/// provider, but the mapping below would work against a relational database too.
+/// </summary>
+public sealed class BankDbContext : DbContext
+{
+    public BankDbContext(DbContextOptions<BankDbContext> options) : base(options)
+    {
+    }
+
+    public DbSet<BankAccount> Accounts => Set<BankAccount>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        var account = modelBuilder.Entity<BankAccount>();
+
+        account.HasKey(a => a.Id);
+
+        // Convert the CustomerId value object to/from its underlying Guid.
+        account.Property(a => a.CustomerId)
+            .HasConversion(
+                id => id.Value,
+                value => CustomerId.From(value))
+            .IsRequired();
+
+        // Convert the AccountNumber value object to/from its underlying string.
+        account.Property(a => a.AccountNumber)
+            .HasConversion(
+                number => number.Value,
+                value => AccountNumber.From(value))
+            .IsRequired();
+
+        account.Property(a => a.EarningScore).IsRequired();
+        account.Property(a => a.Status).IsRequired();
+        account.Property(a => a.DocumentUri);
+        account.Property(a => a.CreatedOnUtc).IsRequired();
+
+        // Domain events are not persisted.
+        account.Ignore(a => a.DomainEvents);
+    }
+}

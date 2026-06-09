@@ -1,0 +1,37 @@
+﻿using AutoMapper;
+using BankService.Domain.Entities;
+using BankService.Domain.Enums;
+using BankService.Domain.ValueObjects;
+using BankService.Infrastructure.Persistence.Models;
+
+namespace BankService.Infrastructure.Persistence.Mapping;
+
+/// <summary>
+/// AutoMapper profile that translates between the domain <see cref="BankAccount"/>
+/// aggregate and the infrastructure <see cref="BankAccountRecord"/> persistence model.
+/// </summary>
+public sealed class PersistenceMappingProfile : Profile
+{
+    public PersistenceMappingProfile()
+    {
+        // Domain -> persistence record: flatten the value objects to primitives.
+        CreateMap<BankAccount, BankAccountRecord>()
+            .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId.Value))
+            .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(src => src.AccountNumber.Value))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()));
+
+        // Persistence record -> domain: reconstitute the aggregate via its domain
+        // factory, rebuilding the value objects. ForAllMembers(Ignore) ensures
+        // AutoMapper does not try to write to the aggregate's private setters.
+        CreateMap<BankAccountRecord, BankAccount>()
+            .ConstructUsing(src => BankAccount.Restore(
+                src.Id,
+                CustomerId.From(src.CustomerId),
+                AccountNumber.From(src.AccountNumber),
+                src.EarningScore,
+                Enum.Parse<AccountStatus>(src.Status),
+                src.DocumentUri,
+                src.CreatedOnUtc))
+            .ForAllMembers(opt => opt.Ignore());
+    }
+}

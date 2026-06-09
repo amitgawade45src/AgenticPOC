@@ -1,0 +1,15 @@
+using System.Collections.Concurrent;
+using BankService.Infrastructure.Persistence.Models;
+
+namespace BankService.Infrastructure.Persistence;
+
+/// <summary>
+/// A tiny in-memory stand-in for a database that replaces the EF Core DbContext
+/// in this mock. Registered as a singleton so the "stored" account records live for
+/// the lifetime of the application. It stores the infrastructure
+/// <see cref="BankAccountRecord"/> model, not the domain entity.
+/// </summary>
+public sealed class InMemoryBankStore
+{
+    public ConcurrentDictionary<Guid, BankAccountRecord> Accounts { get; } = new();
+}

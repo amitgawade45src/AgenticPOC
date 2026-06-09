@@ -1,0 +1,47 @@
+﻿using BankService.Domain.Entities;
+using BankService.Domain.Interfaces;
+using BankService.Domain.ValueObjects;
+
+namespace BankService.Infrastructure.Persistence;
+
+/// <summary>
+/// In-memory implementation of <see cref="IAccountRepository"/>. Reads come from
+/// the committed <see cref="InMemoryBankStore"/> (plus anything staged in the
+/// current unit of work); writes are staged into the <see cref="InMemoryChangeTracker"/>
+/// and only become visible to other scopes once <see cref="UnitOfWork"/> commits.
+/// </summary>
+public sealed class AccountRepository : IAccountRepository
+{
+    private readonly InMemoryBankStore _store;
+    private readonly InMemoryChangeTracker _changeTracker;
+
+    public AccountRepository(InMemoryBankStore store, InMemoryChangeTracker changeTracker)
+    {
+        _store = store;
+        _changeTracker = changeTracker;
+    }
+
+    public Task AddAsync(BankAccount account, CancellationToken cancellationToken = default)
+    {
+        _changeTracker.PendingAccounts.Add(account);
+        return Task.CompletedTask;
+    }
+
+    public Task<BankAccount?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var account = _changeTracker.PendingAccounts.FirstOrDefault(a => a.Id == id)
+            ?? (_store.Accounts.TryGetValue(id, out var stored) ? stored : null);
+
+        return Task.FromResult(account);
+    }
+
+    public Task<BankAccount?> GetByCustomerIdAsync(
+        CustomerId customerId,
+        CancellationToken cancellationToken = default)
+    {
+        var account = _changeTracker.PendingAccounts.FirstOrDefault(a => a.CustomerId == customerId)
+            ?? _store.Accounts.Values.FirstOrDefault(a => a.CustomerId == customerId);
+
+        return Task.FromResult(account);
+    }
+}

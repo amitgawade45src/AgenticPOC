@@ -1,0 +1,14 @@
+﻿using System.Collections.Concurrent;
+using BankService.Domain.Entities;
+
+namespace BankService.Infrastructure.Persistence;
+
+/// <summary>
+/// A tiny in-memory stand-in for a database that replaces the EF Core DbContext
+/// in this mock. Registered as a singleton so the "stored" accounts live for the
+/// lifetime of the application.
+/// </summary>
+public sealed class InMemoryBankStore
+{
+    public ConcurrentDictionary<Guid, BankAccount> Accounts { get; } = new();
+}

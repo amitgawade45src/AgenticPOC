@@ -1,0 +1,65 @@
+﻿using BankService.Application.Commands.OpenAccount;
+using BankService.Application.Queries.GetAccount;
+using BankService.Models;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
+
+namespace BankService.Controllers;
+
+/// <summary>
+/// API entry point for the account-opening use case. This is the presentation layer:
+/// it translates HTTP into application commands/queries via MediatR and translates
+/// the results back into HTTP responses. It contains no business logic.
+/// </summary>
+[ApiController]
+[Route("api/accounts")]
+public sealed class AccountOpeningController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public AccountOpeningController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    /// <summary>
+    /// Handles the "Apply to open account" action. Accepts the customer details and
+    /// an uploaded document (multipart/form-data).
+    /// </summary>
+    [HttpPost("open")]
+    [ProducesResponseType(typeof(OpenAccountResponse), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(OpenAccountResponse), StatusCodes.Status422UnprocessableEntity)]
+    public async Task<IActionResult> Open([FromForm] OpenAccountRequest request, CancellationToken cancellationToken)
+    {
+        await using var documentStream = request.Document.OpenReadStream();
+
+        var command = new OpenAccountCommand(Guid.NewGuid(), request.FullName, documentStream, request.Document.FileName, request.Document.ContentType);
+
+        var result = await _mediator.Send(command, cancellationToken);
+
+        var response = new OpenAccountResponse
+        {
+            IsApproved = result.IsApproved,
+            Message = result.Message,
+            AccountId = result.Account?.Id,
+            AccountNumber = result.Account?.AccountNumber,
+            Status = result.Account?.Status,
+            DocumentUri = result.Account?.DocumentUri
+        };
+
+        // Eligible -> 200; ineligible (business-rule rejection) -> 422.
+        return result.IsApproved ? Ok(response) : UnprocessableEntity(response);
+    }
+
+    /// <summary>
+    /// Retrieves a previously opened account by id.
+    /// </summary>
+    [HttpGet("{accountId:guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> GetById(Guid accountId, CancellationToken cancellationToken)
+    {
+        var account = await _mediator.Send(new GetAccountQuery(accountId), cancellationToken);
+        return account is null ? NotFound() : Ok(account);
+    }
+}

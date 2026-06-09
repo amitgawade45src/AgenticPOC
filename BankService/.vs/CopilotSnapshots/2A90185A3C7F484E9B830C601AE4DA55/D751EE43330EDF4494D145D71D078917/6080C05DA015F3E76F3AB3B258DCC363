@@ -1,0 +1,110 @@
+﻿using BankService.Application.DTOs;
+using BankService.Application.Interfaces;
+using BankService.Domain.Entities;
+using BankService.Domain.Exceptions;
+using BankService.Domain.Interfaces;
+using BankService.Domain.ValueObjects;
+using MediatR;
+using Microsoft.Extensions.Logging;
+
+namespace BankService.Application.Commands.OpenAccount;
+
+/// <summary>
+/// Orchestrates the account-opening use case:
+/// 1. Ask the (mock) external credit-score API for the customer's earning score.
+/// 2. Upload the onboarding document to blob storage.
+/// 3. Delegate the eligibility decision to the <see cref="BankAccount"/> aggregate.
+/// 4. Persist the account when the domain approves it.
+/// The application layer coordinates; the business rule lives in the domain.
+/// </summary>
+public sealed class OpenAccountCommandHandler : IRequestHandler<OpenAccountCommand, AccountOpeningResult>
+{
+    private readonly ICreditScoreService _creditScoreService;
+    private readonly IDocumentStorage _documentStorage;
+    private readonly IAccountRepository _accountRepository;
+    private readonly IUnitOfWork _unitOfWork;
+    private readonly IDateTimeService _dateTimeService;
+    private readonly IPublisher _publisher;
+    private readonly ILogger<OpenAccountCommandHandler> _logger;
+
+    public OpenAccountCommandHandler(ICreditScoreService creditScoreService, IDocumentStorage documentStorage, IAccountRepository accountRepository, IUnitOfWork unitOfWork, IDateTimeService dateTimeService, IPublisher publisher, ILogger<OpenAccountCommandHandler> logger)
+    {
+        _creditScoreService = creditScoreService;
+        _documentStorage = documentStorage;
+        _accountRepository = accountRepository;
+        _unitOfWork = unitOfWork;
+        _dateTimeService = dateTimeService;
+        _publisher = publisher;
+        _logger = logger;
+    }
+
+    public async Task<AccountOpeningResult> Handle(OpenAccountCommand request, CancellationToken cancellationToken)
+    {
+        var customerId = CustomerId.From(request.CustomerId);
+
+        // 1. Call the external (mock) credit-score API from the infrastructure layer.
+        var creditScore = await _creditScoreService.GetEarningScoreAsync(
+            request.CustomerId, cancellationToken);
+
+        _logger.LogInformation(
+            "Customer {CustomerId} returned earning score {Score}.",
+            request.CustomerId, creditScore.EarningScore);
+
+        // 2. Store the uploaded document in blob storage (infrastructure layer).
+        var documentUri = await _documentStorage.UploadAsync(
+            request.DocumentContent,
+            request.DocumentFileName,
+            request.DocumentContentType,
+            cancellationToken);
+
+        try
+        {
+            // 3. Let the domain aggregate apply the business rule and decide.
+            var account = BankAccount.Open(
+                customerId,
+                creditScore.EarningScore,
+                documentUri,
+                _dateTimeService.UtcNow);
+
+            // 4. Persist the newly opened account as a single unit of work.
+            await _accountRepository.AddAsync(account, cancellationToken);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+            _logger.LogInformation(
+                "Account {AccountNumber} opened for customer {CustomerId}.",
+                account.AccountNumber, request.CustomerId);
+
+            // 5. Publish the domain events raised by the aggregate (e.g. send the
+            // welcome email) now that the account is safely persisted.
+            foreach (var domainEvent in account.DomainEvents)
+            {
+                await _publisher.Publish(domainEvent, cancellationToken);
+            }
+
+            account.ClearDomainEvents();
+
+            return AccountOpeningResult.Approved(ToDto(account));
+        }
+        catch (IneligibleCustomerException ex)
+        {
+            // Business-rule failure (low earning score) is an expected outcome,
+            // not an exceptional error, so translate it into a rejection result.
+            _logger.LogWarning(
+                "Customer {CustomerId} ineligible: {Reason}",
+                request.CustomerId, ex.Message);
+
+            return AccountOpeningResult.Rejected(ex.Message);
+        }
+    }
+
+    private static AccountDto ToDto(BankAccount account) => new()
+    {
+        Id = account.Id,
+        CustomerId = account.CustomerId.Value,
+        AccountNumber = account.AccountNumber.Value,
+        EarningScore = account.EarningScore,
+        Status = account.Status.ToString(),
+        DocumentUri = account.DocumentUri,
+        CreatedOnUtc = account.CreatedOnUtc
+    };
+}

@@ -1,0 +1,19 @@
+﻿using BankService.Domain.Entities;
+using BankService.Domain.ValueObjects;
+
+namespace BankService.Domain.Interfaces;
+
+/// <summary>
+/// Repository abstraction for persisting and retrieving <see cref="BankAccount"/>
+/// aggregates. The interface lives in the domain layer; the implementation lives
+/// in infrastructure (Dependency Inversion). Committing changes is the
+/// responsibility of <see cref="IUnitOfWork"/>.
+/// </summary>
+public interface IAccountRepository
+{
+    Task AddAsync(BankAccount account, CancellationToken cancellationToken = default);
+
+    Task<BankAccount?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
+
+    Task<BankAccount?> GetByCustomerIdAsync(CustomerId customerId, CancellationToken cancellationToken = default);
+}

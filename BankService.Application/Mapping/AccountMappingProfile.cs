@@ -1,0 +1,24 @@
+using AutoMapper;
+using BankService.Application.DTOs;
+using BankService.Domain.Entities;
+
+namespace BankService.Application.Mapping;
+
+/// <summary>
+/// AutoMapper profile that projects the <see cref="BankAccount"/> aggregate to the
+/// <see cref="AccountDto"/> read model, flattening its value objects and child documents.
+/// </summary>
+public sealed class AccountMappingProfile : Profile
+{
+    public AccountMappingProfile()
+    {
+        CreateMap<BankAccount, AccountDto>()
+            .ForMember(dest => dest.CustomerId, opt => opt.MapFrom(src => src.CustomerId.Value))
+            .ForMember(dest => dest.AccountNumber, opt => opt.MapFrom(src => src.AccountNumber.Value))
+            .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+            .ForMember(dest => dest.Documents, opt => opt.MapFrom(src => src.Documents));
+
+        CreateMap<Document, DocumentDto>()
+            .ForMember(dest => dest.VerificationStatus, opt => opt.MapFrom(src => src.VerificationStatus.ToString()));
+    }
+}

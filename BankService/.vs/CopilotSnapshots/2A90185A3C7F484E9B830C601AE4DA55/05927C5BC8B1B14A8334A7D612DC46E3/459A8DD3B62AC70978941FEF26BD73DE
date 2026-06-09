@@ -1,0 +1,14 @@
+﻿namespace BankService.Models;
+
+/// <summary>
+/// The response returned to the presentation/client after an account-opening attempt.
+/// </summary>
+public sealed class OpenAccountResponse
+{
+    public bool IsApproved { get; init; }
+    public string Message { get; init; } = string.Empty;
+    public Guid? AccountId { get; init; }
+    public string? AccountNumber { get; init; }
+    public string? Status { get; init; }
+    public string? DocumentUri { get; init; }
+}

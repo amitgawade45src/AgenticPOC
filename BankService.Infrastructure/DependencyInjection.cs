@@ -1,0 +1,55 @@
+using Azure.Storage.Blobs;
+using BankService.Application.Interfaces;
+using BankService.Domain.Interfaces;
+using BankService.Infrastructure.Common;
+using BankService.Infrastructure.CreditScore;
+using BankService.Infrastructure.Email;
+using BankService.Infrastructure.Persistence;
+using BankService.Infrastructure.Persistence.Mapping;
+using BankService.Infrastructure.Storage;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+namespace BankService.Infrastructure;
+
+/// <summary>
+/// Registers all infrastructure-layer services: the in-memory store, repository and
+/// unit of work, the mock credit-score API, blob document storage, and the system clock.
+/// </summary>
+public static class DependencyInjection
+{
+    public static IServiceCollection AddInfrastructure(
+        this IServiceCollection services,
+        IConfiguration configuration)
+    {
+        // Persistence (in-memory store for this mock).
+        services.AddSingleton<InMemoryBankStore>();
+        services.AddScoped<InMemoryChangeTracker>();
+        services.AddSingleton<IBankAccountMapper, BankAccountMapper>();
+        services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        // External (mock) credit-score API.
+        services.AddScoped<ICreditScoreService, MockCreditScoreService>();
+
+        // Mock email sender (used by the AccountOpenedEvent handler).
+        services.AddScoped<IEmailService, MockEmailService>();
+
+        // System clock.
+        services.AddSingleton<IDateTimeService, DateTimeService>();
+
+        // Azure Blob Storage document store.
+        var connectionString = configuration.GetConnectionString("BlobStorage")
+            ?? "UseDevelopmentStorage=true";
+        var containerName = configuration["BlobStorage:ContainerName"] ?? "onboarding-documents";
+
+        services.AddSingleton(_ => new BlobServiceClient(connectionString));
+        services.AddScoped<IDocumentStorage>(sp => new BlobDocumentStorage(
+            sp.GetRequiredService<BlobServiceClient>(),
+            containerName,
+            sp.GetRequiredService<ILogger<BlobDocumentStorage>>()));
+
+        return services;
+    }
+}

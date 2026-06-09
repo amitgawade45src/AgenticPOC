@@ -1,0 +1,17 @@
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Infrastructure.deps.json
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Infrastructure.dll
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Infrastructure.pdb
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.AssemblyInfoInputs.cache
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.AssemblyInfo.cs
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.dll
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\refint\BankService.Infrastructure.dll
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.pdb
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\ref\BankService.Infrastructure.dll
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Application.dll
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Domain.dll
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Application.pdb
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Domain.pdb
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.csproj.AssemblyReference.cache
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankServ.555EE48D.Up2Date

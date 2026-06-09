@@ -1,0 +1,14 @@
+﻿using MediatR;
+
+namespace BankService.Domain.Common;
+
+/// <summary>
+/// Marker interface for domain events. A domain event records something
+/// meaningful that happened to an aggregate in the past tense. It extends
+/// MediatR's <see cref="INotification"/> so events can be published to one or
+/// more handlers.
+/// </summary>
+public interface IDomainEvent : INotification
+{
+    DateTime OccurredOnUtc { get; }
+}

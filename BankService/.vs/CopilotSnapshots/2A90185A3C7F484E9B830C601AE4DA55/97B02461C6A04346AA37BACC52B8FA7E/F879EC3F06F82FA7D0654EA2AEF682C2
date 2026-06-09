@@ -1,0 +1,80 @@
+﻿using BankService.Domain.Common;
+using BankService.Domain.Enums;
+using BankService.Domain.Events;
+using BankService.Domain.Exceptions;
+using BankService.Domain.Rules;
+using BankService.Domain.ValueObjects;
+
+namespace BankService.Domain.Entities;
+
+/// <summary>
+/// The aggregate root for the account-opening process. It owns the invariants of
+/// the account lifecycle: an account can only be opened for an eligible customer,
+/// and opening it raises an <see cref="AccountOpenedEvent"/>.
+/// </summary>
+public sealed class BankAccount
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
+
+    public Guid Id { get; private set; }
+    public CustomerId CustomerId { get; private set; }
+    public AccountNumber AccountNumber { get; private set; }
+    public int EarningScore { get; private set; }
+    public AccountStatus Status { get; private set; }
+    public string? DocumentUri { get; private set; }
+    public DateTime CreatedOnUtc { get; private set; }
+
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    // Required by EF Core materialization.
+    private BankAccount()
+    {
+    }
+
+    private BankAccount(
+        CustomerId customerId,
+        AccountNumber accountNumber,
+        int earningScore,
+        string documentUri,
+        DateTime createdOnUtc)
+    {
+        Id = Guid.NewGuid();
+        CustomerId = customerId;
+        AccountNumber = accountNumber;
+        EarningScore = earningScore;
+        DocumentUri = documentUri;
+        CreatedOnUtc = createdOnUtc;
+        Status = AccountStatus.Open;
+    }
+
+    /// <summary>
+    /// Factory that enforces the core domain invariant: an account may only be
+    /// opened when the customer satisfies <see cref="AccountEligibilityRule"/>.
+    /// </summary>
+    /// <exception cref="IneligibleCustomerException">
+    /// Thrown when the earning score is below the required minimum.
+    /// </exception>
+    public static BankAccount Open(
+        CustomerId customerId,
+        int earningScore,
+        string documentUri,
+        DateTime createdOnUtc)
+    {
+        if (!AccountEligibilityRule.IsEligible(earningScore))
+        {
+            throw new IneligibleCustomerException(earningScore, AccountEligibilityRule.MinimumEarningScore);
+        }
+
+        var account = new BankAccount(
+            customerId,
+            AccountNumber.Generate(),
+            earningScore,
+            documentUri,
+            createdOnUtc);
+
+        account._domainEvents.Add(new AccountOpenedEvent(customerId, account.AccountNumber, createdOnUtc));
+        return account;
+    }
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}

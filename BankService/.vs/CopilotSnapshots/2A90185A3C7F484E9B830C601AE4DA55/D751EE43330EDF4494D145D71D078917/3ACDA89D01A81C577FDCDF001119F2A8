@@ -1,0 +1,19 @@
+﻿namespace BankService.Infrastructure.Persistence.Models;
+
+/// <summary>
+/// Infrastructure-oriented persistence model for a bank account. This is a flat
+/// POCO that mirrors how the account is stored (value objects flattened to
+/// primitives). It is intentionally a separate type from the domain
+/// <see cref="BankService.Domain.Entities.BankAccount"/> so the persistence shape
+/// can evolve independently of the domain model.
+/// </summary>
+public sealed class BankAccountRecord
+{
+    public Guid Id { get; set; }
+    public Guid CustomerId { get; set; }
+    public string AccountNumber { get; set; } = string.Empty;
+    public int EarningScore { get; set; }
+    public string Status { get; set; } = string.Empty;
+    public string? DocumentUri { get; set; }
+    public DateTime CreatedOnUtc { get; set; }
+}

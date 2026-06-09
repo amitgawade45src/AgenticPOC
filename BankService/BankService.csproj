@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>1c3c2fa4-a5ea-42a0-94f9-61bdc06bb06a</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BankService.Application\BankService.Application.csproj" />
+    <ProjectReference Include="..\BankService.Infrastructure\BankService.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

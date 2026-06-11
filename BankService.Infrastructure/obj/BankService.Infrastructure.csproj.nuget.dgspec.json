@@ -748,9 +748,6 @@
             "projectReferences": {
               "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj": {
                 "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj"
-              },
-              "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\BankService.Domain.csproj": {
-                "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\BankService.Domain.csproj"
               }
             }
           }

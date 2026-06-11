@@ -23,9 +23,7 @@ public sealed class AccountOpenedEventHandler : INotificationHandler<AccountOpen
 
     public async Task Handle(AccountOpenedEvent notification, CancellationToken cancellationToken)
     {
-        _logger.LogInformation(
-            "Handling AccountOpenedEvent for customer {CustomerId}, account {AccountNumber}.",
-            notification.CustomerId, notification.AccountNumber);
+        _logger.LogInformation("Handling AccountOpenedEvent for customer {CustomerId}, account {AccountNumber}.", notification.CustomerId, notification.AccountNumber);
 
         // In a real system the customer's email would be looked up; mocked here.
         var to = $"customer-{notification.CustomerId}@example.com";

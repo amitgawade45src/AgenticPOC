@@ -8,7 +8,4 @@ namespace BankService.Domain.Events;
 /// is successfully opened. Downstream handlers could send a welcome email,
 /// notify compliance, etc.
 /// </summary>
-public sealed record AccountOpenedEvent(
-    CustomerId CustomerId,
-    AccountNumber AccountNumber,
-    DateTime OccurredOnUtc) : IDomainEvent;
+public sealed record AccountOpenedEvent(CustomerId CustomerId, AccountNumber AccountNumber, DateTime OccurredOnUtc) : IDomainEvent;

@@ -1,7 +1,7 @@
 using BankService.Application.DTOs;
 using MediatR;
 
-namespace BankService.Application.Queries.GetAccount;
+namespace BankService.Application.UseCases.Queries.GetAccount;
 
 /// <summary>
 /// Query to retrieve a single account by its identifier.

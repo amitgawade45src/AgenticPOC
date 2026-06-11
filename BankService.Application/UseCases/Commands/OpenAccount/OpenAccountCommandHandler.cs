@@ -7,7 +7,7 @@ using BankService.Domain.ValueObjects;
 using MediatR;
 using Microsoft.Extensions.Logging;
 
-namespace BankService.Application.Commands.OpenAccount;
+namespace BankService.Application.UseCases.Commands.OpenAccount;
 
 /// <summary>
 /// Orchestrates the account-opening use case:

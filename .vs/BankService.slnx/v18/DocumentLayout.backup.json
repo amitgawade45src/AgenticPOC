@@ -1,0 +1,236 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Projects\\a_myPOCs\\BankService\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.application\\eventhandlers\\accountopenedeventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|solutionrelative:bankservice.application\\eventhandlers\\accountopenedeventhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{79B9334A-D342-CAFB-A5A9-6E63AC7779A8}|BankService\\BankService.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice\\controllers\\accountopeningcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{79B9334A-D342-CAFB-A5A9-6E63AC7779A8}|BankService\\BankService.csproj|solutionrelative:bankservice\\controllers\\accountopeningcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.application\\usecases\\commands\\openaccount\\openaccountvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|solutionrelative:bankservice.application\\usecases\\commands\\openaccount\\openaccountvalidator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.application\\usecases\\commands\\openaccount\\openaccountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|solutionrelative:bankservice.application\\usecases\\commands\\openaccount\\openaccountcommandhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.application\\usecases\\commands\\openaccount\\openaccountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|solutionrelative:bankservice.application\\usecases\\commands\\openaccount\\openaccountcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.application\\usecases\\queries\\getaccount\\getaccountqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|solutionrelative:bankservice.application\\usecases\\queries\\getaccount\\getaccountqueryhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.application\\usecases\\queries\\getaccount\\getaccountquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{42EFE1FA-2516-720F-C83F-D68421A205F1}|BankService.Application\\BankService.Application.csproj|solutionrelative:bankservice.application\\usecases\\queries\\getaccount\\getaccountquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A938CE3-2054-6100-2C75-DC2837E9381A}|BankService.Domain\\BankService.Domain.csproj|c:\\projects\\a_mypocs\\bankservice\\bankservice.domain\\entities\\bankaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A938CE3-2054-6100-2C75-DC2837E9381A}|BankService.Domain\\BankService.Domain.csproj|solutionrelative:bankservice.domain\\entities\\bankaccount.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 27,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{c6f34f0d-7ae5-4f3a-be61-fe0c21ae9eb8}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OpenAccountValidator.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountValidator.cs",
+              "RelativeDocumentMoniker": "BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountValidator.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountValidator.cs",
+              "RelativeToolTip": "BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountValidator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T05:40:36.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "OpenAccountCommand.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommand.cs",
+              "RelativeDocumentMoniker": "BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommand.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommand.cs",
+              "RelativeToolTip": "BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T05:40:30.791Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GetAccountQueryHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQueryHandler.cs",
+              "RelativeDocumentMoniker": "BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQueryHandler.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQueryHandler.cs",
+              "RelativeToolTip": "BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQueryHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T05:40:26.342Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GetAccountQuery.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQuery.cs",
+              "RelativeDocumentMoniker": "BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQuery.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQuery.cs",
+              "RelativeToolTip": "BankService.Application\\UseCases\\Queries\\GetAccount\\GetAccountQuery.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T05:40:21.438Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "BankAccount.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\Entities\\BankAccount.cs",
+              "RelativeDocumentMoniker": "BankService.Domain\\Entities\\BankAccount.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\Entities\\BankAccount.cs",
+              "RelativeToolTip": "BankService.Domain\\Entities\\BankAccount.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABUAAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T05:37:44.74Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountOpeningController.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService\\Controllers\\AccountOpeningController.cs",
+              "RelativeDocumentMoniker": "BankService\\Controllers\\AccountOpeningController.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService\\Controllers\\AccountOpeningController.cs",
+              "RelativeToolTip": "BankService\\Controllers\\AccountOpeningController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB4AAABhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-11T04:44:24.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OpenAccountCommandHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommandHandler.cs",
+              "RelativeDocumentMoniker": "BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommandHandler.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommandHandler.cs",
+              "RelativeToolTip": "BankService.Application\\UseCases\\Commands\\OpenAccount\\OpenAccountCommandHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T07:53:52.582Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountOpenedEventHandler.cs",
+              "DocumentMoniker": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\EventHandlers\\AccountOpenedEventHandler.cs",
+              "RelativeDocumentMoniker": "BankService.Application\\EventHandlers\\AccountOpenedEventHandler.cs",
+              "ToolTip": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\EventHandlers\\AccountOpenedEventHandler.cs",
+              "RelativeToolTip": "BankService.Application\\EventHandlers\\AccountOpenedEventHandler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAIwCUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-10T05:00:30.897Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

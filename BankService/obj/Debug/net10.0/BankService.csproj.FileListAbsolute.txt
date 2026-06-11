@@ -121,3 +121,4 @@ C:\Projects\a_myPOCs\BankService\BankService\bin\Debug\net10.0\System.Security.C
 C:\Projects\a_myPOCs\BankService\BankService\bin\Debug\net10.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Projects\a_myPOCs\BankService\BankService\bin\Debug\net10.0\BankService.Infrastructure.dll
 C:\Projects\a_myPOCs\BankService\BankService\bin\Debug\net10.0\BankService.Infrastructure.pdb
+C:\Projects\a_myPOCs\BankService\BankService\obj\Debug\net10.0\BankService.sourcelink.json

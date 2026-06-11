@@ -1138,7 +1138,6 @@
       "AutoMapper >= 14.0.0",
       "Azure.Storage.Blobs >= 12.29.0",
       "BankService.Application >= 1.0.0",
-      "BankService.Domain >= 1.0.0",
       "Microsoft.Extensions.Configuration.Abstractions >= 10.0.8",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 10.0.8"
     ]
@@ -1180,9 +1179,6 @@
           "projectReferences": {
             "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj": {
               "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj"
-            },
-            "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\BankService.Domain.csproj": {
-              "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\BankService.Domain.csproj"
             }
           }
         }

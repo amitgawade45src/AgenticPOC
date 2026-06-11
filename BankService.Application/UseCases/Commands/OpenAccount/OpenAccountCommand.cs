@@ -1,7 +1,7 @@
 using BankService.Application.DTOs;
 using MediatR;
 
-namespace BankService.Application.Commands.OpenAccount;
+namespace BankService.Application.UseCases.Commands.OpenAccount;
 
 /// <summary>
 /// Command representing a customer's request to open a bank account, dispatched

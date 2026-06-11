@@ -1,5 +1,5 @@
-using BankService.Application.Commands.OpenAccount;
-using BankService.Application.Queries.GetAccount;
+using BankService.Application.UseCases.Commands.OpenAccount;
+using BankService.Application.UseCases.Queries.GetAccount;
 using BankService.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v10.0": {
       "BankService/1.0.0": {
         "dependencies": {
-          "BankService.Application": "1.0.0",
           "BankService.Infrastructure": "1.0.0"
         },
         "runtime": {
@@ -211,8 +210,7 @@
         "dependencies": {
           "AutoMapper": "14.0.0",
           "Azure.Storage.Blobs": "12.29.0",
-          "BankService.Application": "1.0.0",
-          "BankService.Domain": "1.0.0"
+          "BankService.Application": "1.0.0"
         },
         "runtime": {
           "BankService.Infrastructure.dll": {

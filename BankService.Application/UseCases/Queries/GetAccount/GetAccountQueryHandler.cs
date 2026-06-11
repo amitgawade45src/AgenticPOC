@@ -3,7 +3,7 @@ using BankService.Application.DTOs;
 using BankService.Domain.Interfaces;
 using MediatR;
 
-namespace BankService.Application.Queries.GetAccount;
+namespace BankService.Application.UseCases.Queries.GetAccount;
 
 /// <summary>
 /// Handles <see cref="GetAccountQuery"/> by loading the aggregate from the

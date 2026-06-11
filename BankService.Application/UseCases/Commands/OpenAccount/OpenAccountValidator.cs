@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace BankService.Application.Commands.OpenAccount;
+namespace BankService.Application.UseCases.Commands.OpenAccount;
 
 /// <summary>
 /// Input validation for <see cref="OpenAccountCommand"/>. This guards the request

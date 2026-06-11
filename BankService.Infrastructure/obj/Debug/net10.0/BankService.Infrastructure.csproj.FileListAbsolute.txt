@@ -15,3 +15,4 @@ C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\Ba
 C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\bin\Debug\net10.0\BankService.Domain.pdb
 C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.csproj.AssemblyReference.cache
 C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankServ.555EE48D.Up2Date
+C:\Projects\a_myPOCs\BankService\BankService.Infrastructure\obj\Debug\net10.0\BankService.Infrastructure.sourcelink.json

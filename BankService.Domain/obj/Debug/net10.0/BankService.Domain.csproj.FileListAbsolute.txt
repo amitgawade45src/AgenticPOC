@@ -10,3 +10,4 @@ C:\Projects\a_myPOCs\BankService\BankService.Domain\obj\Debug\net10.0\refint\Ban
 C:\Projects\a_myPOCs\BankService\BankService.Domain\obj\Debug\net10.0\BankService.Domain.pdb
 C:\Projects\a_myPOCs\BankService\BankService.Domain\obj\Debug\net10.0\ref\BankService.Domain.dll
 C:\Projects\a_myPOCs\BankService\BankService.Domain\obj\Debug\net10.0\BankService.Domain.csproj.AssemblyReference.cache
+C:\Projects\a_myPOCs\BankService\BankService.Domain\obj\Debug\net10.0\BankService.Domain.sourcelink.json

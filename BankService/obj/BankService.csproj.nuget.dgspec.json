@@ -748,9 +748,6 @@
             "projectReferences": {
               "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj": {
                 "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj"
-              },
-              "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\BankService.Domain.csproj": {
-                "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Domain\\BankService.Domain.csproj"
               }
             }
           }
@@ -1113,9 +1110,6 @@
             "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {
-              "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj": {
-                "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Application\\BankService.Application.csproj"
-              },
               "C:\\Projects\\a_myPOCs\\BankService\\BankService.Infrastructure\\BankService.Infrastructure.csproj": {
                 "projectPath": "C:\\Projects\\a_myPOCs\\BankService\\BankService.Infrastructure\\BankService.Infrastructure.csproj"
               }

@@ -21,15 +21,37 @@ public sealed class UnitOfWork : IUnitOfWork
 
     public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        var pending = _changeTracker.PendingAccounts;
+        var pendingAccounts = _changeTracker.PendingAccounts;
+        var pendingCustomers = _changeTracker.PendingCustomers;
+        var pendingInstantLoans = _changeTracker.PendingInstantLoans;
+        var pendingHomeLoans = _changeTracker.PendingHomeLoans;
 
-        foreach (var account in pending)
+        foreach (var account in pendingAccounts)
         {
             _store.Accounts[account.Id] = account;
         }
 
-        var committed = pending.Count;
-        pending.Clear();
+        foreach (var customer in pendingCustomers)
+        {
+            _store.Customers[customer.Id] = customer;
+        }
+
+        foreach (var instantLoan in pendingInstantLoans)
+        {
+            _store.InstantLoans[instantLoan.Id] = instantLoan;
+        }
+
+        foreach (var homeLoan in pendingHomeLoans)
+        {
+            _store.HomeLoans[homeLoan.Id] = homeLoan;
+        }
+
+        var committed = pendingAccounts.Count + pendingCustomers.Count + pendingInstantLoans.Count + pendingHomeLoans.Count;
+
+        pendingAccounts.Clear();
+        pendingCustomers.Clear();
+        pendingInstantLoans.Clear();
+        pendingHomeLoans.Clear();
 
         return Task.FromResult(committed);
     }

@@ -12,4 +12,10 @@ namespace BankService.Infrastructure.Persistence;
 public sealed class InMemoryBankStore
 {
     public ConcurrentDictionary<Guid, BankAccountRecord> Accounts { get; } = new();
+
+    public ConcurrentDictionary<Guid, CustomerRecord> Customers { get; } = new();
+
+    public ConcurrentDictionary<Guid, InstantLoanRecord> InstantLoans { get; } = new();
+
+    public ConcurrentDictionary<Guid, HomeLoanRecord> HomeLoans { get; } = new();
 }

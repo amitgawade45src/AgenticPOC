@@ -27,7 +27,13 @@ public static class DependencyInjection
         services.AddSingleton<InMemoryBankStore>();
         services.AddScoped<InMemoryChangeTracker>();
         services.AddSingleton<IBankAccountMapper, BankAccountMapper>();
+        services.AddSingleton<ICustomerMapper, CustomerMapper>();
+        services.AddSingleton<IInstantLoanMapper, InstantLoanMapper>();
+        services.AddSingleton<IHomeLoanMapper, HomeLoanMapper>();
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ICustomerRepository, CustomerRepository>();
+        services.AddScoped<IInstantLoanRepository, InstantLoanRepository>();
+        services.AddScoped<IHomeLoanRepository, HomeLoanRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // External (mock) credit-score API.

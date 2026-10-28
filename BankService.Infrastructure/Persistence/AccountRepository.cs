@@ -36,6 +36,13 @@ public sealed class AccountRepository : IAccountRepository
         return Task.CompletedTask;
     }
 
+    public Task UpdateAsync(BankAccount account, CancellationToken cancellationToken = default)
+    {
+        _changeTracker.PendingAccounts.RemoveAll(a => a.Id == account.Id);
+        _changeTracker.PendingAccounts.Add(_mapper.ToRecord(account));
+        return Task.CompletedTask;
+    }
+
     public Task<BankAccount?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         var record = _changeTracker.PendingAccounts.FirstOrDefault(a => a.Id == id)

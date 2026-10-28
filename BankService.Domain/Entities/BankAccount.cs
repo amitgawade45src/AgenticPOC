@@ -86,6 +86,7 @@ public sealed class BankAccount : AggregateRoot
     {
         var document = Document.Upload(uri, fileName, uploadedOnUtc);
         _documents.Add(document);
+        RaiseDomainEvent(new DocumentUploadedEvent(Id, document.Id, uri, fileName, uploadedOnUtc));
         return document;
     }
 
@@ -93,12 +94,36 @@ public sealed class BankAccount : AggregateRoot
     /// Marks one of the account's documents as verified. The root enforces the
     /// invariant that the document must belong to this aggregate before mutating it.
     /// </summary>
-    public void VerifyDocument(Guid documentId) => RequireDocument(documentId).MarkVerified();
+    public void VerifyDocument(Guid documentId)
+    {
+        var document = RequireDocument(documentId);
+        document.MarkVerified();
+        RaiseDomainEvent(new DocumentVerifiedEvent(Id, document.Id, DateTime.UtcNow));
+    }
 
     /// <summary>
     /// Marks one of the account's documents as rejected.
     /// </summary>
-    public void RejectDocument(Guid documentId) => RequireDocument(documentId).MarkRejected();
+    public void RejectDocument(Guid documentId)
+    {
+        var document = RequireDocument(documentId);
+        document.MarkRejected();
+        RaiseDomainEvent(new DocumentRejectedEvent(Id, document.Id, DateTime.UtcNow));
+    }
+
+    /// <summary>
+    /// Closes an open account and records the corresponding domain event.
+    /// </summary>
+    public void Close(DateTime closedOnUtc)
+    {
+        if (Status == AccountStatus.Closed)
+        {
+            return;
+        }
+
+        Status = AccountStatus.Closed;
+        RaiseDomainEvent(new AccountClosedEvent(Id, CustomerId, AccountNumber, closedOnUtc));
+    }
 
     private Document RequireDocument(Guid documentId)
     {

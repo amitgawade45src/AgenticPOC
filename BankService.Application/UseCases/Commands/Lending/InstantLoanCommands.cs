@@ -1,7 +1,6 @@
 using AutoMapper;
 using BankService.Application.DTOs;
 using BankService.Application.Interfaces;
-using BankService.Application.UseCases.Common;
 using BankService.Domain.Entities;
 using BankService.Domain.Interfaces;
 using BankService.Domain.ValueObjects;
@@ -16,20 +15,17 @@ public sealed class ApplyForInstantLoanCommandHandler : IRequestHandler<ApplyFor
     private readonly IInstantLoanRepository _instantLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public ApplyForInstantLoanCommandHandler(
         IInstantLoanRepository instantLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _instantLoanRepository = instantLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -39,7 +35,6 @@ public sealed class ApplyForInstantLoanCommandHandler : IRequestHandler<ApplyFor
 
         await _instantLoanRepository.AddAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<InstantLoanDto>(loan);
     }
@@ -52,20 +47,17 @@ public sealed class ApproveInstantLoanCommandHandler : IRequestHandler<ApproveIn
     private readonly IInstantLoanRepository _instantLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public ApproveInstantLoanCommandHandler(
         IInstantLoanRepository instantLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _instantLoanRepository = instantLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -78,7 +70,6 @@ public sealed class ApproveInstantLoanCommandHandler : IRequestHandler<ApproveIn
 
         await _instantLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<InstantLoanDto>(loan);
     }
@@ -91,20 +82,17 @@ public sealed class RejectInstantLoanCommandHandler : IRequestHandler<RejectInst
     private readonly IInstantLoanRepository _instantLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public RejectInstantLoanCommandHandler(
         IInstantLoanRepository instantLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _instantLoanRepository = instantLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -117,7 +105,6 @@ public sealed class RejectInstantLoanCommandHandler : IRequestHandler<RejectInst
 
         await _instantLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<InstantLoanDto>(loan);
     }
@@ -130,20 +117,17 @@ public sealed class DisburseInstantLoanCommandHandler : IRequestHandler<Disburse
     private readonly IInstantLoanRepository _instantLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public DisburseInstantLoanCommandHandler(
         IInstantLoanRepository instantLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _instantLoanRepository = instantLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -156,7 +140,6 @@ public sealed class DisburseInstantLoanCommandHandler : IRequestHandler<Disburse
 
         await _instantLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<InstantLoanDto>(loan);
     }
@@ -169,20 +152,17 @@ public sealed class RepayInstantLoanCommandHandler : IRequestHandler<RepayInstan
     private readonly IInstantLoanRepository _instantLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public RepayInstantLoanCommandHandler(
         IInstantLoanRepository instantLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _instantLoanRepository = instantLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -195,7 +175,6 @@ public sealed class RepayInstantLoanCommandHandler : IRequestHandler<RepayInstan
 
         await _instantLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<InstantLoanDto>(loan);
     }

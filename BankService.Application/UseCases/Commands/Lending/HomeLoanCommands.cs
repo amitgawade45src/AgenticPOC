@@ -1,7 +1,6 @@
 using AutoMapper;
 using BankService.Application.DTOs;
 using BankService.Application.Interfaces;
-using BankService.Application.UseCases.Common;
 using BankService.Domain.Entities;
 using BankService.Domain.Interfaces;
 using BankService.Domain.ValueObjects;
@@ -22,20 +21,17 @@ public sealed class ApplyForHomeLoanCommandHandler : IRequestHandler<ApplyForHom
     private readonly IHomeLoanRepository _homeLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public ApplyForHomeLoanCommandHandler(
         IHomeLoanRepository homeLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _homeLoanRepository = homeLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -52,7 +48,6 @@ public sealed class ApplyForHomeLoanCommandHandler : IRequestHandler<ApplyForHom
 
         await _homeLoanRepository.AddAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<HomeLoanDto>(loan);
     }
@@ -65,20 +60,17 @@ public sealed class ApproveHomeLoanCommandHandler : IRequestHandler<ApproveHomeL
     private readonly IHomeLoanRepository _homeLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public ApproveHomeLoanCommandHandler(
         IHomeLoanRepository homeLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _homeLoanRepository = homeLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -91,7 +83,6 @@ public sealed class ApproveHomeLoanCommandHandler : IRequestHandler<ApproveHomeL
 
         await _homeLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<HomeLoanDto>(loan);
     }
@@ -104,20 +95,17 @@ public sealed class RejectHomeLoanCommandHandler : IRequestHandler<RejectHomeLoa
     private readonly IHomeLoanRepository _homeLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public RejectHomeLoanCommandHandler(
         IHomeLoanRepository homeLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _homeLoanRepository = homeLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -130,7 +118,6 @@ public sealed class RejectHomeLoanCommandHandler : IRequestHandler<RejectHomeLoa
 
         await _homeLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<HomeLoanDto>(loan);
     }
@@ -143,20 +130,17 @@ public sealed class DisburseHomeLoanCommandHandler : IRequestHandler<DisburseHom
     private readonly IHomeLoanRepository _homeLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public DisburseHomeLoanCommandHandler(
         IHomeLoanRepository homeLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _homeLoanRepository = homeLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -169,7 +153,6 @@ public sealed class DisburseHomeLoanCommandHandler : IRequestHandler<DisburseHom
 
         await _homeLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<HomeLoanDto>(loan);
     }
@@ -182,20 +165,17 @@ public sealed class PayEmiCommandHandler : IRequestHandler<PayEmiCommand, HomeLo
     private readonly IHomeLoanRepository _homeLoanRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public PayEmiCommandHandler(
         IHomeLoanRepository homeLoanRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _homeLoanRepository = homeLoanRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -208,7 +188,6 @@ public sealed class PayEmiCommandHandler : IRequestHandler<PayEmiCommand, HomeLo
 
         await _homeLoanRepository.UpdateAsync(loan, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(loan, _publisher, cancellationToken);
 
         return _mapper.Map<HomeLoanDto>(loan);
     }

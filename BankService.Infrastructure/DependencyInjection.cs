@@ -26,6 +26,10 @@ public static class DependencyInjection
         // Persistence (in-memory store for this mock).
         services.AddSingleton<InMemoryBankStore>();
         services.AddScoped<InMemoryChangeTracker>();
+
+        // Single licensed AutoMapper configuration for the persistence (domain <-> record) mappings.
+        services.AddSingleton(_ => PersistenceMapperFactory.Create(
+            Application.DependencyInjection.GetAutoMapperLicenseKey(configuration)));
         services.AddSingleton<IBankAccountMapper, BankAccountMapper>();
         services.AddSingleton<ICustomerMapper, CustomerMapper>();
         services.AddSingleton<IInstantLoanMapper, InstantLoanMapper>();
@@ -34,6 +38,7 @@ public static class DependencyInjection
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<IInstantLoanRepository, InstantLoanRepository>();
         services.AddScoped<IHomeLoanRepository, HomeLoanRepository>();
+        services.AddScoped<IBankDbContext, InMemoryBankDbContext>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         // External (mock) credit-score API.

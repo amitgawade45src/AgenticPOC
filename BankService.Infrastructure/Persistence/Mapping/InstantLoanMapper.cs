@@ -8,12 +8,9 @@ public sealed class InstantLoanMapper : IInstantLoanMapper
 {
     private readonly IMapper _mapper;
 
-    public InstantLoanMapper()
+    public InstantLoanMapper(PersistenceMapper persistenceMapper)
     {
-        var configuration = new MapperConfiguration(cfg =>
-            cfg.AddProfile<PersistenceMappingProfile>());
-
-        _mapper = configuration.CreateMapper();
+        _mapper = persistenceMapper.Mapper;
     }
 
     public InstantLoanRecord ToRecord(InstantLoan loan) => _mapper.Map<InstantLoanRecord>(loan);

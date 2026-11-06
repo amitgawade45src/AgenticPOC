@@ -8,12 +8,9 @@ public sealed class HomeLoanMapper : IHomeLoanMapper
 {
     private readonly IMapper _mapper;
 
-    public HomeLoanMapper()
+    public HomeLoanMapper(PersistenceMapper persistenceMapper)
     {
-        var configuration = new MapperConfiguration(cfg =>
-            cfg.AddProfile<PersistenceMappingProfile>());
-
-        _mapper = configuration.CreateMapper();
+        _mapper = persistenceMapper.Mapper;
     }
 
     public HomeLoanRecord ToRecord(HomeLoan loan) => _mapper.Map<HomeLoanRecord>(loan);

@@ -8,12 +8,9 @@ public sealed class CustomerMapper : ICustomerMapper
 {
     private readonly IMapper _mapper;
 
-    public CustomerMapper()
+    public CustomerMapper(PersistenceMapper persistenceMapper)
     {
-        var configuration = new MapperConfiguration(cfg =>
-            cfg.AddProfile<PersistenceMappingProfile>());
-
-        _mapper = configuration.CreateMapper();
+        _mapper = persistenceMapper.Mapper;
     }
 
     public CustomerRecord ToRecord(Customer customer) => _mapper.Map<CustomerRecord>(customer);

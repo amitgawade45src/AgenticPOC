@@ -9,7 +9,8 @@ namespace BankService.Domain.Interfaces;
 public interface IUnitOfWork
 {
     /// <summary>
-    /// Persists all staged changes as a single unit and returns the number of
+    /// Persists all staged changes as a single unit, then dispatches the domain events
+    /// raised by the persisted aggregates and clears them. Returns the number of
     /// affected aggregates.
     /// </summary>
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

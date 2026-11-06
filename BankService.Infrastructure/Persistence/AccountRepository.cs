@@ -33,6 +33,7 @@ public sealed class AccountRepository : IAccountRepository
     public Task AddAsync(BankAccount account, CancellationToken cancellationToken = default)
     {
         _changeTracker.PendingAccounts.Add(_mapper.ToRecord(account));
+        _changeTracker.Track(account);
         return Task.CompletedTask;
     }
 
@@ -40,6 +41,7 @@ public sealed class AccountRepository : IAccountRepository
     {
         _changeTracker.PendingAccounts.RemoveAll(a => a.Id == account.Id);
         _changeTracker.PendingAccounts.Add(_mapper.ToRecord(account));
+        _changeTracker.Track(account);
         return Task.CompletedTask;
     }
 

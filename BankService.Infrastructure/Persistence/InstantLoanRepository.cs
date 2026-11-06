@@ -24,6 +24,7 @@ public sealed class InstantLoanRepository : IInstantLoanRepository
     public Task AddAsync(InstantLoan aggregate, CancellationToken cancellationToken = default)
     {
         _changeTracker.PendingInstantLoans.Add(_mapper.ToRecord(aggregate));
+        _changeTracker.Track(aggregate);
         return Task.CompletedTask;
     }
 
@@ -31,6 +32,7 @@ public sealed class InstantLoanRepository : IInstantLoanRepository
     {
         _changeTracker.PendingInstantLoans.RemoveAll(l => l.Id == aggregate.Id);
         _changeTracker.PendingInstantLoans.Add(_mapper.ToRecord(aggregate));
+        _changeTracker.Track(aggregate);
         return Task.CompletedTask;
     }
 

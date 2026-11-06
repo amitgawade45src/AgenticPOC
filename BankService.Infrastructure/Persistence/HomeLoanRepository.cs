@@ -24,6 +24,7 @@ public sealed class HomeLoanRepository : IHomeLoanRepository
     public Task AddAsync(HomeLoan aggregate, CancellationToken cancellationToken = default)
     {
         _changeTracker.PendingHomeLoans.Add(_mapper.ToRecord(aggregate));
+        _changeTracker.Track(aggregate);
         return Task.CompletedTask;
     }
 
@@ -31,6 +32,7 @@ public sealed class HomeLoanRepository : IHomeLoanRepository
     {
         _changeTracker.PendingHomeLoans.RemoveAll(l => l.Id == aggregate.Id);
         _changeTracker.PendingHomeLoans.Add(_mapper.ToRecord(aggregate));
+        _changeTracker.Track(aggregate);
         return Task.CompletedTask;
     }
 

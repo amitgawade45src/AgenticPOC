@@ -12,8 +12,8 @@ public static class ServiceRegistration
 {
     public static IServiceCollection AddBankServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddApplication();
-        services.AddInfrastructure(configuration); 
+        services.AddApplication(configuration);
+        services.AddInfrastructure(configuration);
         return services;
     }
 }

@@ -14,7 +14,8 @@ namespace BankService.Application.UseCases.Commands.OpenAccount;
 /// 1. Ask the (mock) external credit-score API for the customer's earning score.
 /// 2. Upload the onboarding document to blob storage.
 /// 3. Delegate the eligibility decision to the <see cref="BankAccount"/> aggregate.
-/// 4. Persist the account when the domain approves it.
+/// 4. Persist the account when the domain approves it; the unit of work dispatches
+///    the raised domain events (e.g. welcome e-mail) once the commit succeeds.
 /// The application layer coordinates; the business rule lives in the domain.
 /// </summary>
 public sealed class OpenAccountCommandHandler : IRequestHandler<OpenAccountCommand, AccountOpeningResult>
@@ -24,17 +25,15 @@ public sealed class OpenAccountCommandHandler : IRequestHandler<OpenAccountComma
     private readonly IAccountRepository _accountRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly ILogger<OpenAccountCommandHandler> _logger;
 
-    public OpenAccountCommandHandler(ICreditScoreService creditScoreService, IDocumentStorage documentStorage, IAccountRepository accountRepository, IUnitOfWork unitOfWork, IDateTimeService dateTimeService, IPublisher publisher, ILogger<OpenAccountCommandHandler> logger)
+    public OpenAccountCommandHandler(ICreditScoreService creditScoreService, IDocumentStorage documentStorage, IAccountRepository accountRepository, IUnitOfWork unitOfWork, IDateTimeService dateTimeService, ILogger<OpenAccountCommandHandler> logger)
     {
         _creditScoreService = creditScoreService;
         _documentStorage = documentStorage;
         _accountRepository = accountRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _logger = logger;
     }
 
@@ -67,22 +66,15 @@ public sealed class OpenAccountCommandHandler : IRequestHandler<OpenAccountComma
                 request.DocumentFileName,
                 _dateTimeService.UtcNow);
 
-            // 4. Persist the newly opened account as a single unit of work.
+            // 4. Persist the newly opened account as a single unit of work. The unit of
+            // work publishes the aggregate's domain events (e.g. the welcome e-mail)
+            // once the account is safely persisted.
             await _accountRepository.AddAsync(account, cancellationToken);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             _logger.LogInformation(
                 "Account {AccountNumber} opened for customer {CustomerId}.",
                 account.AccountNumber, request.CustomerId);
-
-            // 5. Publish the domain events raised by the aggregate (e.g. send the
-            // welcome email) now that the account is safely persisted.
-            foreach (var domainEvent in account.DomainEvents)
-            {
-                await _publisher.Publish(domainEvent, cancellationToken);
-            }
-
-            account.ClearDomainEvents();
 
             return AccountOpeningResult.Approved(ToDto(account));
         }

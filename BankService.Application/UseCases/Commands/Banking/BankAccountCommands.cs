@@ -1,7 +1,6 @@
 using AutoMapper;
 using BankService.Application.DTOs;
 using BankService.Application.Interfaces;
-using BankService.Application.UseCases.Common;
 using BankService.Domain.Interfaces;
 using MediatR;
 
@@ -19,7 +18,6 @@ public sealed class AddDocumentCommandHandler : IRequestHandler<AddDocumentComma
     private readonly IDocumentStorage _documentStorage;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public AddDocumentCommandHandler(
@@ -27,14 +25,12 @@ public sealed class AddDocumentCommandHandler : IRequestHandler<AddDocumentComma
         IDocumentStorage documentStorage,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _accountRepository = accountRepository;
         _documentStorage = documentStorage;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -53,7 +49,6 @@ public sealed class AddDocumentCommandHandler : IRequestHandler<AddDocumentComma
 
         await _accountRepository.UpdateAsync(account, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(account, _publisher, cancellationToken);
 
         return _mapper.Map<AccountDto>(account);
     }
@@ -65,18 +60,15 @@ public sealed class VerifyDocumentCommandHandler : IRequestHandler<VerifyDocumen
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public VerifyDocumentCommandHandler(
         IAccountRepository accountRepository,
         IUnitOfWork unitOfWork,
-        IPublisher publisher,
         IMapper mapper)
     {
         _accountRepository = accountRepository;
         _unitOfWork = unitOfWork;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -89,7 +81,6 @@ public sealed class VerifyDocumentCommandHandler : IRequestHandler<VerifyDocumen
 
         await _accountRepository.UpdateAsync(account, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(account, _publisher, cancellationToken);
 
         return _mapper.Map<AccountDto>(account);
     }
@@ -101,18 +92,15 @@ public sealed class RejectDocumentCommandHandler : IRequestHandler<RejectDocumen
 {
     private readonly IAccountRepository _accountRepository;
     private readonly IUnitOfWork _unitOfWork;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public RejectDocumentCommandHandler(
         IAccountRepository accountRepository,
         IUnitOfWork unitOfWork,
-        IPublisher publisher,
         IMapper mapper)
     {
         _accountRepository = accountRepository;
         _unitOfWork = unitOfWork;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -125,7 +113,6 @@ public sealed class RejectDocumentCommandHandler : IRequestHandler<RejectDocumen
 
         await _accountRepository.UpdateAsync(account, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(account, _publisher, cancellationToken);
 
         return _mapper.Map<AccountDto>(account);
     }
@@ -138,20 +125,17 @@ public sealed class CloseAccountCommandHandler : IRequestHandler<CloseAccountCom
     private readonly IAccountRepository _accountRepository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IDateTimeService _dateTimeService;
-    private readonly IPublisher _publisher;
     private readonly IMapper _mapper;
 
     public CloseAccountCommandHandler(
         IAccountRepository accountRepository,
         IUnitOfWork unitOfWork,
         IDateTimeService dateTimeService,
-        IPublisher publisher,
         IMapper mapper)
     {
         _accountRepository = accountRepository;
         _unitOfWork = unitOfWork;
         _dateTimeService = dateTimeService;
-        _publisher = publisher;
         _mapper = mapper;
     }
 
@@ -164,7 +148,6 @@ public sealed class CloseAccountCommandHandler : IRequestHandler<CloseAccountCom
 
         await _accountRepository.UpdateAsync(account, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        await DomainEventPublisher.PublishAndClearAsync(account, _publisher, cancellationToken);
 
         return _mapper.Map<AccountDto>(account);
     }

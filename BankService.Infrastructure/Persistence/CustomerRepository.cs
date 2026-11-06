@@ -24,6 +24,7 @@ public sealed class CustomerRepository : ICustomerRepository
     public Task AddAsync(Customer aggregate, CancellationToken cancellationToken = default)
     {
         _changeTracker.PendingCustomers.Add(_mapper.ToRecord(aggregate));
+        _changeTracker.Track(aggregate);
         return Task.CompletedTask;
     }
 
@@ -31,6 +32,7 @@ public sealed class CustomerRepository : ICustomerRepository
     {
         _changeTracker.PendingCustomers.RemoveAll(c => c.Id == aggregate.Id);
         _changeTracker.PendingCustomers.Add(_mapper.ToRecord(aggregate));
+        _changeTracker.Track(aggregate);
         return Task.CompletedTask;
     }
 
